@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=4 uid="uid://cnmucni2b6c5i"]
+[gd_scene load_steps=15 format=4 uid="uid://cnmucni2b6c5i"]
 
 [ext_resource type="PackedScene" uid="uid://dkm5hqgkcjr41" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://cl424aep0vfgp" path="res://assets/sprites/world_tileset.png" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://dfihc7dq4utdw" path="res://scenes/killzone.tscn" id="3_iywne"]
 [ext_resource type="PackedScene" uid="uid://b0adbgaym4ce0" path="res://scenes/platform.tscn" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://dywx8lf1qps02" path="res://scenes/coin.tscn" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://cqb8bpn2hnyf7" path="res://scenes/slime.tscn" id="6_p57ef"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("2_yqjtg")
@@ -316,8 +317,6 @@ texture = ExtResource("2_yqjtg")
 [sub_resource type="TileSet" id="TileSet_p57ef"]
 sources/1 = SubResource("TileSetAtlasSource_iywne")
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_iywne"]
-
 [sub_resource type="Animation" id="Animation_lbhrr"]
 length = 0.001
 tracks/0/type = "value"
@@ -356,6 +355,8 @@ _data = {
 &"move": SubResource("Animation_lnu2h")
 }
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_p57ef"]
+
 [node name="Game" type="Node2D"]
 
 [node name="Tilemap" type="Node" parent="."]
@@ -379,13 +380,6 @@ zoom = Vector2(2.5, 2.5)
 limit_bottom = 120
 limit_smoothed = true
 position_smoothing_enabled = true
-
-[node name="killzone" parent="." instance=ExtResource("3_iywne")]
-position = Vector2(85, 113)
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone"]
-shape = SubResource("WorldBoundaryShape2D_iywne")
 
 [node name="Coins" type="Node" parent="."]
 
@@ -414,3 +408,12 @@ libraries = {
 &"": SubResource("AnimationLibrary_iywne")
 }
 autoplay = "move"
+
+[node name="Killzone" parent="." instance=ExtResource("3_iywne")]
+position = Vector2(129, 109)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+shape = SubResource("WorldBoundaryShape2D_p57ef")
+
+[node name="Slime" parent="." instance=ExtResource("6_p57ef")]
+position = Vector2(126, -44)
